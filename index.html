@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Validation</title>
+    <style>
+      #alertMessage {
+        color: red;
+        background: #ff000026;
+        font-size: 12px;
+        padding: 11px 12px;
+        display: inline-block;
+        border-radius: 6px;
+      }
+      #successMessage {
+        color: green;
+        background: rgba(0, 128, 0, 0.193);
+        font-size: 12px;
+        padding: 11px 12px;
+        display: inline-block;
+        border-radius: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <form onsubmit="formSubmit(event)">
+      <input id="firstName" type="text" placeholder="First name" />
+      <input type="text" placeholder="Last name" />
+      <input type="text" placeholder="User name" />
+      <input id="age" type="number" placeholder="Age" />
+      <input type="email" placeholder="Email address" />
+      <input id="password" type="password" placeholder="Password" />
+      <input
+        id="confirmPassword"
+        type="password"
+        placeholder="Confirm Password"
+      />
+
+      <button type="submit">Submit</button>
+    </form>
+    <p id="alertMessage"></p>
+    <p id="successMessage"></p>
+  </body>
+  <script>
+    function formSubmit(event) {
+      event.preventDefault();
+
+      let age = document.querySelector("#age").value;
+      let password = document.querySelector("#password").value;
+      let confirmPassword = document.querySelector("#confirmPassword").value;
+      let alertMessage = document.querySelector("#alertMessage");
+      let successMessage = document.querySelector("#successMessage");
+
+      if (age < 18) {
+        alertMessage.innerHTML =
+          "You are below the required age... Come back when you are 18";
+      } else {
+        if (password.length <= 8) {
+          alertMessage.innerHTML = "Password Strength is low";
+        } else {
+          if (password == confirmPassword) {
+            successMessage.innerHTML =
+              "Form Validated completed. Thanks for registering";
+            document.querySelector("#age").value = "";
+            document.querySelector("#firstName").value = "";
+          } else {
+            alert("Password Mismatch, check password again");
+          }
+        }
+      }
+    }
+  </script>
+</html>
